@@ -5,6 +5,7 @@ import com.pronix.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -38,6 +39,11 @@ public class BookController {
     @DeleteMapping("/{id}")
     public void deleteBook(@PathVariable Long id){
         bookService.deleteBook(id);
+    }
+
+    @GetMapping("/current-user")
+    public String getLoggedInUser(Principal principal){
+        return principal.getName();
     }
 
 }
