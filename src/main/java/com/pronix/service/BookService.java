@@ -25,6 +25,19 @@ public class BookService {
         return bookRepository.findById(id).orElse(null);
     }
 
+    public void updateBook(Long id, Book newBook) {
+        Book book = bookRepository.findById(id).orElse(null);
+        if(book != null){
+            book.setBookName(newBook.getBookName());
+            book.setBookAuthor(newBook.getBookAuthor());
+            book.setBookPrice(newBook.getBookPrice());
+            book.setIsbn(newBook.getIsbn());
+            bookRepository.save(book);
+        } else {
+            throw new IllegalArgumentException("Invalid Input");
+        }
+    }
+
     public void deleteBook(Long id) {
         bookRepository.deleteById(id);
     }
